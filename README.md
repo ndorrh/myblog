@@ -3,7 +3,7 @@
 <div align="center">
   <br/>
 
-  <h3><b>Microverse README Template</b></h3>
+  <h3><b>My Blog App</b></h3>
 
 </div>
 
@@ -12,7 +12,7 @@
 # 📗 Table of Contents
 
 - [📗 Table of Contents](#-table-of-contents)
-- [📖 \[My Blog\] ](#-my-blog-)
+- [📖 My Blog ](#-my-blog-)
   - [🛠 Built With Ruby On Rails](#-built-with-ruby-on-rails)
     - [Tech Stack Rails](#tech-stack-rails)
     - [Key Features ](#key-features-)
@@ -32,11 +32,9 @@
 
 <!-- PROJECT DESCRIPTION -->
 
-# 📖 [My Blog] <a name="about-project"></a>
+# 📖 My Blog <a name="about-project"></a>
 
 > This is my Blog where users can register, Create post, comment and Like other user's post
-
-**[your_project__name]** is My Blog
 
 ## 🛠 Built With <a name="built-with">Ruby On Rails</a>
 
