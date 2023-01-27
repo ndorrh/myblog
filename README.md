@@ -36,8 +36,6 @@
 
 > This is my Blog where users can register, Create post, comment and Like other user's post
 
-**[your_project__name]** is My Blog
-
 ## 🛠 Built With <a name="built-with">Ruby On Rails</a>
 
 ### Tech Stack <a name="tech-stack">Rails</a>
