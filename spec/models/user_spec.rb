@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  subject {User.new(name:'Oswald Ebu', photo: 'https://unsplash.com/photos/F_-0BxGuVvo', bio: 'I am learning ruby on rails for the first time', posts_counter: 1)}
+  subject { User.new(name: 'Oswald Ebu', photo: 'https://unsplash.com/photos/F_-0BxGuVvo', bio: 'I am learning ruby on rails for the first time', posts_counter: 1) }
 
-  before {subject.save}
+  before { subject.save }
 
   it 'name should be present' do
     subject.name = nil

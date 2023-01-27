@@ -1,9 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  subject{Post.new(title: 'My first post', author_id: 1, text:'my post is greate', comments_counter: 0, likes_counter: 0)}
+  subject do
+    Post.new(title: 'My first post', author_id: 1, text: 'my post is greate', comments_counter: 0, likes_counter: 0)
+  end
 
-  before {subject.save}
+  before { subject.save }
 
   it 'title should be present' do
     subject.title = nil
@@ -33,7 +35,6 @@ RSpec.describe Post, type: :model do
   end
 
   it 'author_id should be greater than or equal to 0' do
-    
     expect(subject.author_id).to be_integer
   end
 
@@ -45,5 +46,4 @@ RSpec.describe Post, type: :model do
   it 'Return last five posts for user' do
     expect(subject.five_most_recent_comments).to eq([])
   end
-  
 end

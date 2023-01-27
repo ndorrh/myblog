@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
-  subject { Comment.new(author_id: 1, post_id: 1, text:'I like ruby on Rails') }
+  subject { Comment.new(author_id: 1, post_id: 1, text: 'I like ruby on Rails') }
 
   it 'increments comments_counter of post' do
     user = User.create(name: 'John Doe', posts_counter: 0)
