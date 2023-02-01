@@ -11,7 +11,7 @@ RSpec.describe User, type: :model do
   end
 
   it 'name should be present' do
-    expect(User.first.name).to eql 'Oswald Ebu'
+    expect(subject.name).to eql 'Oswald Ebu'
   end
 
   it 'photo link should be present' do
