@@ -33,5 +33,6 @@
 # .gitignore
 node_modules/
 
-spec/requests/
+
 spec/views/
+spec/helpers/
