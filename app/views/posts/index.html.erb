@@ -1,2 +1,17 @@
-<h1>Here is a list of posts for a given user</h1>
+<div class="users_container">
+<%= render partial: 'shared/card_user', locals: {user: @user} %>
+<%#Add post for the user%>
+<% @posts.each do |post| %>
+<a href="posts/<%=post.id%>" class="user_link">
+<%= render partial: 'shared/card_post', locals: {post: post} %>
+</a>
+<div class="comments">
+<%post.five_most_recent_comments.each do |comment|%>
+<%= render partial: 'shared/card_comment', locals: {comment: comment} %>
+<%end%>
+</div>
+<%end%>
+<div class="btn"><button type="button" class="see_all_post">Pagination</button></div>
+</div>
+
 
