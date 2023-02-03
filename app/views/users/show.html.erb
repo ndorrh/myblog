@@ -1,2 +1,14 @@
-<h1>This is a user</h1>
+<div class="users_container">
+<%= render partial: 'shared/card_user', locals: {user: @user} %>
+<p class="user_bio"><%= @user.bio%></p>
+<%#Add post for the user%>
+<% @posts.each do |post| %>
+<a href="<%=post.author_id%>/posts" class="user_link">
+<%= render partial: 'shared/card_post', locals: {post: post} %>
+</a>
+<%end%>
+<div class="btn"><a href="<%=@user.id%>/posts" class="link" class="see_all_post">See all post</a></div>
+</div>
+
+
 

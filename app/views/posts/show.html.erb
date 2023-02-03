@@ -1,1 +1,10 @@
-<h1>This is a  posts for a given user</h1>
+<div class="users_container">
+<%#Add post for the user%>
+<%= render partial: 'shared/post', locals: {post: @post} %>
+<div class="comments">
+<%@post.comments.order(created_at: :desc).each do |comment|%>
+<%= render partial: 'shared/card_comment', locals: {comment: comment} %>
+<%end%>
+</div>
+</div>
+

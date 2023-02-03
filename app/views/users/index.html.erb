@@ -1,2 +1,8 @@
-<h1>Here is a list of users</h1>
+<div class="users_container">
+<% @users.each do |user| %>
+<a href="users/<%=user.id%>" class="user_link">
+<%= render partial: 'shared/card_user', locals: {user: user} %>
+</a>
+<%end%>
+</div>
 
