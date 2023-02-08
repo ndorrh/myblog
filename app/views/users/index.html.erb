@@ -1,7 +1,9 @@
 <div class="users_container">
 <div class="header">
 <h1>MY BLOG</h1>
-<a href="/posts/new"><button type="button" class="see_all_post">Create a Post</button></a>
+  <% if can? :manage, Post %>
+    <a href="/posts/new"><button type="button" class="see_all_post">Create a Post</button></a>   
+  <% end %>
 </div>
 <% @users.each do |user| %>
 <a href="users/<%=user.id%>" class="user_link">
