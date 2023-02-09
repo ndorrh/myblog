@@ -6,7 +6,8 @@
 <a href="/posts/new"><button type="button" class="see_all_post">Create a Post</button></a>
 </div>
 </div>
-<%= render partial: 'shared/card_user', locals: {user: @user} %>
+<%= render partial: 'shared/card_user', locals: {user: @posts[0].author} %>
+
 <%#Add post for the user%>
 <% @posts.each do |post| %>
 <a href="posts/<%=post.id%>" class="user_link">
