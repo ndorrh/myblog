@@ -1,63 +1,71 @@
-RSpec.describe 'posts/index.html.erb', type: :system do
-  before do
-    driven_by(:rack_test)
+require 'rails_helper'
+
+RSpec.describe 'Post index page', type: :feature do
+  before(:example) do
+    @user = User.create(name: 'Ndorrh', bio: 'Aspiring FullStack Dev', photo: 'https://unsplash.com/photos/NDCy2-9JhUs',
+                        posts_counter: 2)
+    @user2 = User.create(name: 'oswald', bio: 'FullStack Dev', photo: 'https://unsplash.com/photos/hodKTZow_Kk',
+                         posts_counter: 2)
+    @post1 = Post.create(title: 'Test', text: 'First Post', comments_counter: 0, likes_counter: 0, author: @user)
+    @post2 = Post.create(title: 'Working?', text: 'Second Post', comments_counter: 0, likes_counter: 0, author: @user)
+    @comment1 = Comment.create(text: 'First Comment', post: @post1, author: @user2)
+    @comment2 = Comment.create(text: 'Second Comment', post: @post2, author: @user2)
+    @like1 = Like.create(post: @post1, author: @user2)
   end
 
-  before :each do
-    @user = User.create(name: 'Tom', photo: 'https://unsplash.com/photos/F_-0BxGuVvo', bio: 'Teacher from Mexico.',
-                        email: 'tom@gmail.com', password: 'tom1234')
-    @user2 = User.create(name: 'Ana', photo: 'https://unsplash.com/photos/F_-0BxGuVvo', bio: 'Teacher from Argentina.',
-                         email: 'ana@gmail.com', password: 'ana1234')
-    @post_counter = 0
-    @post = Post.create(author: @user, title: 'Hello Tom', text: 'This is my first post')
-    @post_counter += 1
-    @post2 = Post.create(author: @user, title: 'Hi there', text: 'This is my sencond post')
-    @post_counter += 1
-    @post3 = Post.create(author: @user, title: 'Bye', text: 'This is my third post')
-    @post_counter += 1
-    Comment.create(post_id: @post.id, author_id: @user2.id, text: 'I really like your idea.')
-    Like.create(post_id: @post.id, author_id: @user2.id)
-    visit user_posts_path(@user)
-  end
+  describe 'the post index page' do
+    it 'displays the users profile picture' do
+      visit user_posts_path(@user)
+      expect(page).to have_css("img[src*='https://unsplash.com/photos/NDCy2-9JhUs']")
+    end
 
-  it 'renders user images' do
-    expect(page).to have_css('img', count: 1) # image
-  end
+    it 'displays the users username' do
+      visit user_posts_path(@user)
+      expect(page).to have_content('Ndorrh')
+    end
 
-  it 'loads user name correctly into the page' do
-    expect(page).to have_content('Tom')
-    expect(page).to have_css('h3', text: 'Tom')
-  end
+    it 'displays the number of posts the user has written' do
+      visit user_posts_path(@user)
+      expect(page).to have_content('4')
+    end
 
-  it 'renders nº of posts user has written' do
-    expect(page).to have_content("nº of posts: #{@user.posts.length}")
-  end
+    it 'displays the post title' do
+      visit user_posts_path(@user)
+      expect(page).to have_content('Test')
+      expect(page).to have_content('Working?')
+    end
 
-  it 'renders post title correctly' do
-    expect(page).to have_content('Hi there')
-    expect(page).to have_content('Hello Tom')
-  end
+    it 'displays the post text' do
+      visit user_posts_path(@user)
+      expect(page).to have_content('First Post')
+      expect(page).to have_content('Second Post')
+      expect(page).to_not have_content('This post')
+    end
 
-  it 'renders post body correctly' do
-    expect(page).to have_content('This is my third post')
-  end
+    it 'displays the first comment' do
+      visit user_posts_path(@user)
+      expect(page).to have_content('First Comment')
+    end
 
-  it 'renders available posts' do
-    expect(page).to have_css("#post-#{@post.id}")
-    expect(page).to have_css("#post-#{@post2.id}")
-    expect(page).to have_css("#post-#{@post3.id}")
-  end
+    it 'displays the number of comments' do
+      visit user_posts_path(@user)
+      expect(page).to have_content('1')
+    end
 
-  it 'renders comments of post' do
-    expect(page.find("#comments-post-#{@post.id}").all('li').length).to eql(@post.comments.length)
-  end
+    it 'displays the number of likes' do
+      visit user_posts_path(@user)
+      expect(page).to have_content('1')
+    end
 
-  it 'renders nº of likes a post has' do
-    expect(page).to have_content("likes: #{@post.likes.length}")
-  end
+    it 'displays Show all posts button' do
+      visit user_posts_path(@user)
+      expect(page).to have_content('Pagination')
+    end
 
-  it "redirects to user/1/post/x when clicked on a post'" do
-    page.find("#post-#{@post.id}").click
-    expect(current_path).to eql(user_post_path(@user, @post))
+    it 'redirects to the post show page when clicked' do
+      visit user_posts_path(@user)
+      click_link 'First Post'
+      expect(page).to have_current_path(user_post_path(@user, @post1))
+    end
   end
 end

@@ -1,50 +1,75 @@
-RSpec.describe 'posts/show.html.erb', type: :system do
-  before do
-    driven_by(:rack_test)
+require 'rails_helper'
+
+RSpec.describe 'Post show page', type: :feature do
+  before(:example) do
+    @user = User.create(
+      name: 'Abdul',
+      bio: 'Aspiring FullStack Dev',
+      photo: 'https://unsplash.com/photos/NDCy2-9JhUs',
+      posts_counter: 2
+    )
+
+    @user2 = User.create(
+      name: 'Jonathan',
+      bio: 'FullStack Dev',
+      photo: 'https://unsplash.com/photos/hodKTZow_Kk',
+      posts_counter: 2
+    )
+
+    @post1 = Post.create(
+      title: 'Test',
+      text: 'First Post',
+      comments_counter: 0,
+      likes_counter: 0,
+      author: @user
+    )
+
+    @comment1 = Comment.create(
+      text: 'First Comment',
+      post: @post1,
+      author: @user2
+    )
+
+    @like1 = Like.create(
+      post: @post1,
+      author: @user2
+    )
   end
 
-  before :each do
-    @user = User.create(name: 'Tom', photo: 'https://unsplash.com/photos/F_-0BxGuVvo', bio: 'Teacher from Mexico.',
-                        email: 'tom@gmail.com', password: 'tom1234')
-    @user2 = User.create(name: 'Ana', photo: 'https://unsplash.com/photos/F_-0BxGuVvo', bio: 'Teacher from Argentina.',
-                         email: 'ana@gmail.com', password: 'ana1234')
-    @post_counter = 0
-    @post = Post.create(author: @user, title: 'Hello Tom', text: 'This is my first post')
-    @post_counter += 1
-    @post2 = Post.create(author: @user, title: 'Hi there', text: 'This is my sencond post')
-    @post_counter += 1
-    @post3 = Post.create(author: @user, title: 'Bye', text: 'This is my third post')
-    @post_counter += 1
-    Comment.create(post_id: @post.id, author_id: @user2.id, text: 'I really like your idea.')
-    Like.create(post_id: @post.id, author_id: @user2.id)
-    visit user_post_path(@user, @post)
-  end
+  describe 'the post show page' do
+    it 'displays the post title' do
+      visit user_post_path(@user, @post1)
+      expect(page).to have_content('Test')
+    end
 
-  it 'renders post author name correctly' do
-    expect(page).to have_content("Post #{@post.id} by #{@post.author.name}")
-  end
+    it 'displays the post author' do
+      visit user_post_path(@user, @post1)
+      expect(page).to have_content('Abdul')
+    end
 
-  it 'renders post title correctly' do
-    expect(page).to have_content('Hello Tom')
-  end
+    it 'displays number of comments' do
+      visit user_post_path(@user, @post1)
+      expect(page).to have_content('1')
+    end
 
-  it 'renders post body correctly' do
-    expect(page).to have_content('This is my first post')
-  end
+    it 'displays number of likes' do
+      visit user_post_path(@user, @post1)
+      expect(page).to have_content('1')
+    end
 
-  it 'renders nº of comments the post has' do
-    expect(page).to have_content("comments: #{@post.comments.length}")
-  end
+    it 'displays the post text' do
+      visit user_post_path(@user, @post1)
+      expect(page).to have_content('First Post')
+    end
 
-  it 'renders nº of likes the post has' do
-    expect(page).to have_content("likes: #{@post.likes.length}")
-  end
+    it 'displays the commentor' do
+      visit user_post_path(@user, @post1)
+      expect(page).to have_content('Jonathan')
+    end
 
-  it 'renders name of comment author' do
-    expect(page).to have_content("#{@post.comments.first.author.name} :")
-  end
-
-  it 'renders name of comment author' do
-    expect(page).to have_content(@post.comments.first.text.to_s)
+    it 'displays the comment text' do
+      visit user_post_path(@user, @post1)
+      expect(page).to have_content('First Comment')
+    end
   end
 end
