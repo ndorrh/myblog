@@ -83,6 +83,7 @@ h2 {
 
 .post_info {
   margin-bottom: 2px;
+  margin-top: 10px;
 }
 
 .post_info p,
@@ -95,6 +96,7 @@ h2 {
 .btn {
   text-align: center;
   margin-top: 20px;
+  height: unset;
 }
 
 .post_info p.comments_likes {
@@ -153,19 +155,85 @@ h2 {
   width: 100%;
 }
 
-.form-group {
+.form-group,
+.field {
   display: flex;
   border: #000 solid 2px;
   margin-bottom: 20px;
   border-radius: 10px;
 }
 
-.form-group .form-control {
+.form-group .form-control,
+#user_password,
+#user_email,
+#user_name,
+#user_bio,
+#user_password_confirmation {
   width: 95%;
   border: unset;
 }
 
-.form-control:focus {
+.form-control:focus,
+#user_password:focus,
+#user_email:focus,
+#user_name:focus,
+#user_bio:focus,
+#user_password_confirmation:focus {
   border: unset;
   outline: unset;
+}
+
+.sign_out {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+}
+
+.actions,
+.log_in {
+  width: 100%;
+}
+
+.rem_me {
+  border: unset;
+}
+
+.login_container,
+.recover_password_container,
+.resend_instruction,
+.sign_up {
+  width: 50%;
+  margin: auto;
+  margin-top: 5%;
+}
+
+.devise_links {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.devise_links > a {
+  text-decoration: none;
+  color: #000;
+  border: solid #000 2px;
+  margin-top: 20px;
+}
+
+.button_to {
+  width: fit-content;
+  height: unset;
+}
+
+label {
+  margin-right: 2px;
+  padding: 3px;
 }

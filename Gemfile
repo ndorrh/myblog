@@ -73,6 +73,7 @@ group :test do
   gem 'webdrivers'
 end
 
+gem 'devise'
 gem 'rails-controller-testing'
 gem 'rspec-html-matchers'
 gem 'rubocop', '>= 1.0', '< 2.0'
