@@ -36,3 +36,5 @@ node_modules/
 
 spec/views/
 spec/helpers/
+
+/config/credentials/development.key
