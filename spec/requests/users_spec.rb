@@ -10,7 +10,7 @@ RSpec.describe 'Users', type: :request do
       get '/users'
       expect(response).to have_http_status(:ok)
       expect(response).to render_template(:index)
-      expect(response.body).to include('Here is a list of users')
+      expect(response.body).to include('<h1>MY BLOG</h1>')
     end
   end
 
@@ -19,7 +19,7 @@ RSpec.describe 'Users', type: :request do
       get "/users/#{@user.id}"
       expect(response).to have_http_status(:ok)
       expect(response).to render_template(:show)
-      expect(response.body).to include('This is a user')
+      expect(response.body).to include('<p class="user_bio">Teacher from Mexico.</p>')
     end
   end
 end

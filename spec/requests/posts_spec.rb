@@ -12,7 +12,7 @@ RSpec.describe 'Posts', type: :request do
       get "/users/#{@post.author_id}/posts"
       expect(response).to have_http_status(:ok)
       expect(response).to render_template(:index)
-      expect(response.body).to include('Here is a list of posts for a given user')
+      expect(response.body).to include('<h1>James</h1>')
     end
   end
 
@@ -21,7 +21,7 @@ RSpec.describe 'Posts', type: :request do
       get "/users/#{@post.author_id}/posts/#{@post.id}"
       expect(response).to have_http_status(:ok)
       expect(response).to render_template(:show)
-      expect(response.body).to include('This is a  posts for a given user')
+      expect(response.body).to include('<p>My first post by James</p>')
     end
   end
 end

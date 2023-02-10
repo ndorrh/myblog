@@ -1,4 +1,11 @@
 <div class="users_container">
+<div class="header">
+<h1>MY BLOG</h1>
+<div class="sign_out">
+<%= button_to "Sign Out", destroy_user_session_path, method: :delete, :class=> "see_all_post"%>
+<a href="/posts/new"><button type="button" class="see_all_post">Create a Post</button></a>
+</div>
+</div>
 <%#Add post for the user%>
 <%= render partial: 'shared/post', locals: {post: @post} %>
 <div class="comments">

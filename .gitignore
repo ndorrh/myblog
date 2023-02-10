@@ -33,6 +33,13 @@
 # .gitignore
 node_modules/
 
+spec/requests/comments_spec.rb
+spec/helpers
+
+
 
 spec/views/
 spec/helpers/
+
+/config/credentials/development.key
+

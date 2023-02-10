@@ -1,4 +1,10 @@
-<div class="avatar"><%= image_tag user.photo %></div>
+<div class="avatar">
+<% if user.avatar.attached?%>
+<image src="<%=(url_for(user.avatar)) %>">
+<%else%>
+<%= image_tag user.photo || "male.png" %>
+<%end%>
+</div>
 <div class="user_info">
 <h1><%=user.name%></h1>
 <p>Number of posts: <%=user.posts_counter || 0%></p>
