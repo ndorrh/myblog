@@ -16,4 +16,14 @@ class CommentsController < ApplicationController
       end
     end
   end
+
+    def destroy
+      comment.author = current_user
+      @comment = Comment.find(params[:id])
+      comment.post = Post.find(comment_params[:post_id])
+    end
+
+    def comment_params
+      params.require(:comment).permit(:id, :post_id)
+    end
 end
