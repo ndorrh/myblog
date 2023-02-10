@@ -8,10 +8,12 @@ Rails.application.routes.draw do
   get '/posts/new', to: 'posts#new', as: :new_user_post
   post '/posts/new', to: 'posts#create' #create_new_post
   post 'comments/new', to: 'comments#create', as: :new_user_comment #create_new_comment
-  post 'comments/destroy', to: 'comments#destroy', as: :delete_user_comment 
+  resources :posts, only: [:destroy]
+  resources :comments, only: [:destroy]
+  #delete 'users/:user_id/posts/:id', to: 'comments#destroy'
   post 'likes/new', to: 'likes#create', as: :new_user_like #create_new_like
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
+  #resource :comment, only: [:destroy]
   # Defines the root path route ("/")
   # root "articles#index"
 end

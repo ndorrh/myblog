@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
+  load_and_authorize_resource
   def index
+    @user = User.find(params[:user_id])
     @posts = Post.includes(:author, comments: [:author]).where(author_id: params[:user_id])
   end
 
@@ -19,6 +21,16 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html { render :new, locals: { post: new_post } }
     end
+  end
+
+  def destroy
+       @post = Post.find(params[:id])
+      if @post.destroy!
+        @post.decrement_posts_counter_for_user
+        flash.now[:notice] = 'Post deleted successfully'
+      redirect_to user_posts_url( @post.author_id)
+      end
+     
   end
 
   def create

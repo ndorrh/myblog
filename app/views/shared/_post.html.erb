@@ -1,6 +1,9 @@
 <div class="post_info">
 <div class="post_head">
 <p><%= post.title%> by <%= post.author.name%></p>
+<% if can? :destroy, @post %>
+<%= button_to 'Delete post', post_path(post), method: :delete, class: "see_all_post delete_btn" %>
+<% end %>
 <p class="post_like">Comments:<%=post.comments_counter || 0%>, Likes:<%=post.likes_counter || 0%></p>
 </div>
 <div class="like-form" >

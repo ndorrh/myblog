@@ -3,10 +3,12 @@
 <h1>MY BLOG</h1>
 <div class="sign_out">
 <%= button_to "Sign Out", destroy_user_session_path, method: :delete, :class=> "see_all_post"%>
+<% if can? :create, @posts %>
 <a href="/posts/new"><button type="button" class="see_all_post">Create a Post</button></a>
+<% end %>
 </div>
 </div>
-<%= render partial: 'shared/card_user', locals: {user: @posts[0].author} %>
+<%= render partial: 'shared/card_user', locals: {user: @user} %>
 
 <%#Add post for the user%>
 <% @posts.each do |post| %>

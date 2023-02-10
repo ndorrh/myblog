@@ -5,6 +5,15 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable
 
   attribute :posts_counter, :integer, default: 0
+  attribute :role
+
+  def admin?
+    role == 'admin'
+  end
+
+  def customer?
+    role == 'default'
+  end
 
   has_one_attached :avatar
   has_many :posts, foreign_key: 'author_id'

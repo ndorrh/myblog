@@ -1,1 +1,6 @@
-<p class="comments_likes"><%=comment.author.name%>: <%= comment.text%></p>
+<div class="comments_likes">
+<% if can? :destroy, @post%>
+<%= button_to 'Delete comment', comment_path(comment), method: :delete, class: "see_all_post delete_btn" %>
+<% end %>
+<p><%=comment.author.name%>: <%= comment.text%></p>
+</div>
